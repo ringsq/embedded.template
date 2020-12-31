@@ -14,7 +14,8 @@ var Box *rice.Box
 
 // LoadTemplates finds and parses all templates embedded in the application
 func LoadTemplates() (*texttmpl.Template, error) {
-	Box = rice.MustFindBox("templates")
+	config := &rice.Config{LocateOrder: []rice.LocateMethod{rice.LocateEmbedded, rice.LocateAppended, rice.LocateWorkingDirectory, rice.LocateFS}}
+	Box = config.MustFindBox("templates")
 	var files []string
 	Box.Walk("/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
