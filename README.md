@@ -20,7 +20,7 @@ folder will be loaded and parsed.
 
 ```golang
 data := {}
-tmpl, err := embedded-template.LoadTemplates()
+tmpl, err := embtemplate.LoadTemplates()
 if err != nil {
     log.Error(err.Error())
     return
@@ -35,7 +35,7 @@ Since the returned template is a standard go template the embedded templates can
 be overridden by parsing files from the filesystem.  eg.
 
 ```golang
-tmpl, err := embedded-template.LoadTemplates()
+tmpl, err := embtemplate.LoadTemplates()
 if err != nil {
     log.Error(err.Error())
     return
