@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"text/template"
 	texttmpl "text/template"
 
 	rice "github.com/GeertJohan/go.rice"
@@ -29,7 +30,9 @@ func (embT *embTemplate) LoadTemplates() (*texttmpl.Template, error) {
 		return nil, err
 	}
 	embT.Files = embT.listTemplates()
-	return embT.parseFiles(nil, embT.Files...)
+	t := template.Must(template.New("").Funcs(template.FuncMap{
+		"Deref": func(i *string) string { return *i }}), nil)
+	return embT.parseFiles(t, embT.Files...)
 }
 
 func (embT *embTemplate) listTemplates() (files []string) {
